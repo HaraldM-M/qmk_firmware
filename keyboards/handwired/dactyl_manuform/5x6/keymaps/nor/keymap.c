@@ -17,72 +17,66 @@ enum dactyl_layers {
 #define LOWER_M  MO(_LOWER_MAC)
 #define RAISE_W  MO(_RAISE_WIN)
 #define LOWER_W  MO(_LOWER_WIN)
-#define SET_WIN DF(_WIN_QWERTY)
-#define SET_MAC DF(_MAC_QWERTY)
+#define SET_WIN  DF(_WIN_QWERTY)
+#define SET_MAC  DF(_MAC_QWERTY)
 
-#define TERM   LGUI(LSFT(KC_ENT))
-#define ALTTAB LGUI(KC_TAB)
-#define KILL   LGUI(LSFT(KC_C))
-#define OPEN   LGUI(KC_P)
-#define KC_QSM LSFT(SE_PLUS)
-#define KC_AA  SE_AA
-#define KC_AE  SE_AE
-#define KC_OE  SE_OSLH
+//From #include "keymap_nordic.h"
+#define TERM     LGUI(LSFT(KC_ENT))
+#define ALTTAB   LGUI(KC_TAB)
+#define KILL     LGUI(LSFT(KC_C))
+#define OPEN     LGUI(KC_P)
+#define KC_QSM   LSFT(SE_PLUS)
+#define KC_AA    SE_AA
+#define KC_AE    SE_AE
+#define KC_OE    SE_OSLH
 
-#define NO_QUES LSFT(NO_PLUS)  //duplicate, delere
-#define NO_HALF KC_GRV        // mac: <  Rename? wrong?
-#define NO_PLUS KC_MINS       // mac: + ? duplicate delete
-#define NO_ACUT KC_EQL        // Test
-#define NO_AM KC_LBRC         // Not tested
-#define NO_QUOT KC_RBRC       // Not tested // this is the "umlaut" char on Nordic keyboards, Apple layout. Test
-#define NO_OSLH KC_QUOT       // Not tested
-#define NO_APOS KC_NUHS       // mac: @ *
-#define NO_LESS KC_NUBS       // Delete?
-#define NO_MINS KC_SLSH       // mac: -  _ duplicate
+#define NO_APOS  KC_NUHS       // mac: @ *
+#define NO_MINS  KC_SLSH       //  - _
+#define NO_PLUS  KC_MINS       //  + ?
+
+/* Norwegian layouts that seem to be better than #include "keymap_nordic.h":
+  - https://github.com/qmk/qmk_firmware/blob/master/keyboards/atreus62/keymaps/194h/keymap.c
+  - https://github.com/qmk/qmk_firmware/blob/master/quantum/keymap_extras/keymap_norwegian.h
+Their contents copied into bottom of this file for future reference. Check these github links for copyright information.
+*/
 
 //Custom
-#define RTAB S(KC_TAB)
-#define MN_STAR S(NO_APOS)
+#define REV_TAB S(KC_TAB)
 
-//Custom MacOS Norwegian
-#define MN_RABK KC_TILD       // > <
-#define MN_LCBR S(SE_LBRC)    // {
-#define MN_RCBR S(SE_RBRC)    // }
-#define MN_EURO ALGR(KC_NUBS) // € ¢
-#define MN_PLSM ALGR(NO_PLUS) // ± ¿
-#define MN_CIRC S(KC_RCBR)    //^ ^   RALT(KC_RCBR) is also an alternative
-#define MN_PIPB RALT(KC_7)    // | s: |  For consistency
-#define MN_BSLS S(RALT(KC_7)) // \           !
-#define MN_LABR KC_GRV        // < >
+//Custom MacOS Norwegian ( MN_* )
+#define MN_STAR S(NO_APOS)         // * *
+#define MN_RABK KC_TILD            // > <
+#define MN_LCBR S(SE_LBRC)         // {
+#define MN_RCBR S(SE_RBRC)         // }
+#define MN_EURO ALGR(KC_NUBS)      // € ¢
+#define MN_PLSM ALGR(NO_PLUS)      // ± ¿
+#define MN_CIRC S(KC_RCBR)         // ^ ^       RALT(KC_RCBR) is also an alternative
+#define MN_PIPB RALT(KC_7)         // | |       //
+#define MN_BSLS S(RALT(KC_7))      // \ \       //
+#define MN_LABR KC_GRV             // < >
+#define MN_TILD RALT(KC_RBRC)      // ~ ^
 
-//Custom Windows Norwegian
-#define WN_STAR KC_PIPE //* *
-#define WN_BSLS KC_EQL //   \ !!!
-#define WN_PIPE KC_GRV //   |
-  //NO_PIPE has no output
-  //LSFT(KC_4) -> Standard currency
-  //RALT(KC_COMM) has no output
-  //KC_GRV -> |
-  //KC_EQL -> \ !!
+//Custom Windows Norwegian ( WN_* )
+#define WN_STAR KC_PIPE            //* *
+#define WN_BSLS KC_EQL             //\ \        //
+#define WN_PIPE KC_GRV             //| |        //
+/* Windows specific output:
+    NO_PIPE has no output
+    LSFT(KC_4) -> Standard currency symbol
+    RALT(KC_COMM) has no output
+    KC_GRV -> |                    //
+    KC_EQL -> \                    //
+*/
 
+//Missing desired shifted value. Look to macro? Current workaround: Right modifier key replaces shift
+#define WN_AT NO_AT             // @ TODO shifted: *
+#define WN_BSL2 SE_LBRC         // [ TODO shifted: {
+#define WN_BSR2 SE_RBRC         // ] TODO shifted: }
+#define WN_EURO RALT(KC_E)      // € TODO shifted: ¢
 
-/* TODO
-  * Rename for consistency
-  * remove unused and gather useful to one table
- */
-
-//TODO Can't find correct code.
-#define MN_TILD _______ //LSFT(KC_RBRC) blir bare ^//RALT(KC_GESC)  ble ingenting //RALT(KC_RCBR)   //TODO | s: \    , men blir bare ^
-
-//Missing correct shifted value. Look to macro?
-#define WN_AT NO_AT             //TODO @ s: *      Win at burde gi * ved shift.... macro necessary(?)
-#define WN_BSL2 SE_LBRC         //TODO eventually. [ and {. Shift not working
-#define WN_BSR2 SE_RBRC         //T55ODO eventually. ] and }. Shift not working
-
-//TODO Impossible?
-#define WN_PLSM _______        // ± ¿
-#define WN_ABOU _______        // ≈ ≠
-#define WN_EURO _______       //€ ¢
+//Missing both values
+#define WN_PLSM _______        // ± ¿     Maybe something using ALT+0177 and ...
+#define WN_ABOU _______        // ≈ ≠     Maybe something using ALT+8776 and ALT+8800
 
 
 
@@ -95,8 +89,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      KC_LCTL, KC_Z   , KC_X   , KC_C   , KC_V   , KC_B   ,                        KC_N   , KC_M   , KC_COMM, KC_DOT , NO_MINS, WN_AT  ,
                        WN_BSL2, WN_BSR2,                                                             SE_LABK, SE_RABK,
                                                   RAISE_W, KC_SPC ,      KC_ENT , LOWER_W,
-                                                  KC_DEL , KC_BSPC,      KC_RCTL, KC_RALT,
-                                                  KC_LALT, KC_LCTL,      KC_RSFT, KC_RGUI
+                                                  KC_DEL , KC_BSPC,      KC_RCTL, KC_LALT,
+                                                  KC_LALT, KC_LCTL,      KC_RGUI, KC_RSFT
   ),
 
   [_MAC_QWERTY] = LAYOUT_5x6(//                               MacOS base layer
@@ -106,13 +100,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      KC_LCTL, KC_Z   , KC_X   , KC_C   , KC_V   , KC_B   ,                        KC_N   , KC_M   , KC_COMM, KC_DOT , NO_MINS, NO_APOS,
                        SE_LBRC, SE_RBRC,                                                            MN_LABR, MN_RABK,
                                                   RAISE_M, KC_SPC ,      KC_ENT , LOWER_M,
-                                                  KC_DEL , KC_BSPC,      KC_RGUI, KC_RALT,
-                                                  KC_LALT, KC_LGUI,      KC_RSFT, KC_RCTL
+                                                  KC_DEL , KC_BSPC,      KC_LGUI, KC_LALT,
+                                                  KC_LALT, KC_RGUI,      KC_LCTL, KC_RSFT
   ),
 
   [_LOWER_WIN] = LAYOUT_5x6(//                             Windows lowered layer
      _______, _______, NO_APOS, _______, WN_EURO, KC_F13 ,                        NO_CIRC, S(KC_7), NO_LPRN, NO_RPRN, WN_ABOU, WN_PLSM,
-     RTAB   , _______, _______, _______, NO_PND , KC_VOLU,                        _______, WN_PIPE, NO_LBRC, NO_RBRC, _______, KC_VOLU,
+     REV_TAB, _______, _______, _______, NO_PND , KC_VOLU,                        _______, WN_PIPE, NO_LBRC, NO_RBRC, _______, KC_VOLU,
      _______, KC_HOME, KC_PGUP, KC_PGDN, KC_END , KC_VOLD,                        _______, WN_BSLS, NO_LCBR, NO_RCBR, _______, KC_VOLD,
      _______, _______, _______, _______, _______, KC_MUTE,                        _______, KC_MPRV, KC_MPLY, KC_MNXT, NO_TILD, WN_STAR,
                        _______, _______,                                                            _______, _______,
@@ -123,7 +117,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_RAISE_WIN] = LAYOUT_5x6(//                              Windows raised layer
      KC_F12 , KC_F1  , KC_F2  , KC_F3  , KC_F4  , KC_F5  ,                        KC_F6  , KC_F7  , KC_F8  , KC_F9  , KC_F10 , KC_F11 ,
-     RTAB   , _______, _______, _______, KC_F14 , KC_VOLU,                        KC_F16 , KC_F17 , KC_F18 , KC_F19 , KC_F20 , KC_F21 ,
+     REV_TAB, _______, _______, _______, KC_F14 , KC_VOLU,                        KC_F16 , KC_F17 , KC_F18 , KC_F19 , KC_F20 , KC_F21 ,
      _______, KC_LEFT, KC_UP  , KC_DOWN, KC_RGHT, KC_VOLD,                        _______, _______, _______, _______, _______, _______,
      _______, KC_HOME, KC_PGUP, KC_PGDN, KC_END , KC_MUTE,                        _______, _______, _______, _______, _______, NO_APOS,
                        _______, _______,                                                            _______, _______,
@@ -135,7 +129,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_LOWER_MAC] = LAYOUT_5x6(//                              MacOS lowered layer
      _______, _______, SE_LESS, _______, MN_EURO, KC_F13 ,                        MN_CIRC, S(KC_7), NO_LPRN, NO_RPRN, SE_RCBR, MN_PLSM,
-     RTAB   , _______, _______, _______, NO_PND , KC_VOLU,                        _______, MN_PIPB, SE_LBRC, SE_RBRC, _______, KC_VOLU,
+     REV_TAB, _______, _______, _______, NO_PND , KC_VOLU,                        _______, MN_PIPB, SE_LBRC, SE_RBRC, _______, KC_VOLU,
      _______, KC_HOME, KC_PGUP, KC_PGDN, KC_END , KC_VOLD,                        _______, MN_BSLS, MN_LCBR, MN_RCBR, _______, KC_VOLD,
      _______, _______, _______, _______, _______, KC_MUTE,                        _______, KC_MPRV, KC_MPLY, KC_MNXT, MN_TILD, MN_STAR,
                        _______, _______,                                                            _______, _______,
@@ -146,7 +140,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_RAISE_MAC] = LAYOUT_5x6(//                               MacOs raised layer
      KC_F12 , KC_F1  , KC_F2  , KC_F3  , KC_F4  , KC_F5  ,                        KC_F6  , KC_F7  , KC_F8  , KC_F9  , KC_F10 , KC_F11 ,
-     RTAB   , _______, _______, _______, KC_F14 , KC_VOLU,                        KC_F16 , KC_F17 , KC_F18 , KC_F19 , KC_F20 , KC_F21 ,
+     REV_TAB, _______, _______, _______, KC_F14 , KC_VOLU,                        KC_F16 , KC_F17 , KC_F18 , KC_F19 , KC_F20 , KC_F21 ,
      _______, KC_LEFT, KC_UP  , KC_DOWN, KC_RGHT, KC_VOLD,                        _______, _______, _______, _______, _______, _______,
      _______, KC_HOME, KC_PGUP, KC_PGDN, KC_END , KC_MUTE,                        _______, _______, _______, _______, _______, _______,
                        _______, _______,                                                            _______, _______,
@@ -158,8 +152,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 
-//Definitions from atreus62
-/*
+/*Definitions from atreus62
+
 #define  NO_AE    KC_QUOT     //  Æ
 #define  NO_AO    KC_LBRC     //  Å
 #define  NO_BSLS  KC_EQL      //  Backslash
@@ -204,4 +198,182 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 #define  NO_HAT   LSFT(NO_UMLA)  //  ^
 #define  NO_ASTR  LSFT(NO_QUOT)  //  *
 #define  NO_TILD  RALT(NO_UMLA)  //  ~
+*//*
+
+*/
+/* Copyright 2016 Jack Humbert
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *//*
+
+#pragma once
+
+#include "keymap.h"
+
+// clang-format off
+
+*//*
+ * ┌───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───────┐
+ * │ | │ 1 │ 2 │ 3 │ 4 │ 5 │ 6 │ 7 │ 8 │ 9 │ 0 │ + │ \ │       │
+ * ├───┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─────┤
+ * │     │ Q │ W │ E │ R │ T │ Y │ U │ I │ O │ P │ Å │ ¨ │     │
+ * ├─────┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┐    │
+ * │      │ A │ S │ D │ F │ G │ H │ J │ K │ L │ Ø │ Æ │ ' │    │
+ * ├────┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴───┴────┤
+ * │    │ < │ Z │ X │ C │ V │ B │ N │ M │ , │ . │ - │          │
+ * ├────┼───┴┬──┴─┬─┴───┴───┴───┴───┴───┴──┬┴───┼───┴┬────┬────┤
+ * │    │    │    │                        │    │    │    │    │
+ * └────┴────┴────┴────────────────────────┴────┴────┴────┴────┘
+ *//*
+// Row 1
+#define NO_PIPE KC_GRV  // |
+#define NO_1    KC_1    // 1
+#define NO_2    KC_2    // 2
+#define NO_3    KC_3    // 3
+#define NO_4    KC_4    // 4
+#define NO_5    KC_5    // 5
+#define NO_6    KC_6    // 6
+#define NO_7    KC_7    // 7
+#define NO_8    KC_8    // 8
+#define NO_9    KC_9    // 9
+#define NO_0    KC_0    // 0
+#define NO_PLUS KC_MINS // +
+#define NO_BSLS KC_EQL  // (backslash)
+// Row 2
+#define NO_Q    KC_Q    // Q
+#define NO_W    KC_W    // W
+#define NO_E    KC_E    // E
+#define NO_R    KC_R    // R
+#define NO_T    KC_T    // T
+#define NO_Y    KC_Y    // Y
+#define NO_U    KC_U    // U
+#define NO_I    KC_I    // I
+#define NO_O    KC_O    // O
+#define NO_P    KC_P    // P
+#define NO_ARNG KC_LBRC // Å
+#define NO_DIAE KC_RBRC // ¨ (dead)
+// Row 3
+#define NO_A    KC_A    // A
+#define NO_S    KC_S    // S
+#define NO_D    KC_D    // D
+#define NO_F    KC_F    // F
+#define NO_G    KC_G    // G
+#define NO_H    KC_H    // H
+#define NO_J    KC_J    // J
+#define NO_K    KC_K    // K
+#define NO_L    KC_L    // L
+#define NO_OSTR KC_SCLN // Ø
+#define NO_AE   KC_QUOT // Æ
+#define NO_QUOT KC_NUHS // '
+// Row 4
+#define NO_LABK KC_NUBS // <
+#define NO_Z    KC_Z    // Z
+#define NO_X    KC_X    // X
+#define NO_C    KC_C    // C
+#define NO_V    KC_V    // V
+#define NO_B    KC_B    // B
+#define NO_N    KC_N    // N
+#define NO_M    KC_M    // M
+#define NO_COMM KC_COMM // ,
+#define NO_DOT  KC_DOT  // .
+#define NO_MINS KC_SLSH // -
+
+*//* Shifted symbols
+ * ┌───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───────┐
+ * │ § │ ! │ " │ # │ ¤ │ % │ & │ / │ ( │ ) │ = │ ? │ ` │       │
+ * ├───┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─────┤
+ * │     │   │   │   │   │   │   │   │   │   │   │   │ ^ │     │
+ * ├─────┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┐    │
+ * │      │   │   │   │   │   │   │   │   │   │   │   │ * │    │
+ * ├────┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴───┴────┤
+ * │    │ > │   │   │   │   │   │   │   │ ; │ : │ _ │          │
+ * ├────┼───┴┬──┴─┬─┴───┴───┴───┴───┴───┴──┬┴───┼───┴┬────┬────┤
+ * │    │    │    │                        │    │    │    │    │
+ * └────┴────┴────┴────────────────────────┴────┴────┴────┴────┘
+ *//*
+// Row 1
+#define NO_SECT S(NO_PIPE) // §
+#define NO_EXLM S(NO_1)    // !
+#define NO_DQUO S(NO_2)    // "
+#define NO_HASH S(NO_3)    // #
+#define NO_CURR S(NO_4)    // ¤
+#define NO_PERC S(NO_5)    // %
+#define NO_AMPR S(NO_6)    // &
+#define NO_SLSH S(NO_7)    // /
+#define NO_LPRN S(NO_8)    // (
+#define NO_RPRN S(NO_9)    // )
+#define NO_EQL  S(NO_0)    // =
+#define NO_QUES S(NO_PLUS) // ?
+#define NO_GRV  S(NO_BSLS) // ` (dead)
+// Row 2
+#define NO_CIRC S(NO_DIAE) // ^ (dead)
+// Row 3
+#define NO_ASTR S(NO_QUOT) // *
+// Row 4
+#define NO_RABK S(NO_LABK) // >
+#define NO_SCLN S(NO_COMM) // ;
+#define NO_COLN S(NO_DOT)  // :
+#define NO_UNDS S(NO_MINS) // _
+
+*//* AltGr symbols
+ * ┌───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───────┐
+ * │   │   │ @ │ £ │ $ │ € │   │ { │ [ │ ] │ } │   │ ´ │       │
+ * ├───┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─────┤
+ * │     │   │   │   │   │   │   │   │   │   │   │   │ ~ │     │
+ * ├─────┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┐    │
+ * │      │   │   │   │   │   │   │   │   │   │   │   │   │    │
+ * ├────┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴───┴────┤
+ * │    │   │   │   │   │   │   │   │ µ │   │   │   │          │
+ * ├────┼───┴┬──┴─┬─┴───┴───┴───┴───┴───┴──┬┴───┼───┴┬────┬────┤
+ * │    │    │    │                        │    │    │    │    │
+ * └────┴────┴────┴────────────────────────┴────┴────┴────┴────┘
+ *//*
+// Row 1
+#define NO_AT   ALGR(NO_2)    // @
+#define NO_PND  ALGR(NO_3)    // £
+#define NO_DLR  ALGR(NO_4)    // $
+#define NO_EURO ALGR(NO_5)    // €
+#define NO_LCBR ALGR(NO_7)    // {
+#define NO_LBRC ALGR(NO_8)    // [
+#define NO_RBRC ALGR(NO_9)    // ]
+#define NO_RCBR ALGR(NO_0)    // }
+#define NO_ACUT ALGR(NO_BSLS) // ´ (dead)
+// Row 2
+#define NO_TILD ALGR(NO_DIAE) // ~ (dead)
+// Row 4
+#define NO_MICR ALGR(NO_M)    // µ
+
+// DEPRECATED
+#define NO_AM       NO_ARNG
+#define NO_AA       NO_ARNG
+#define NO_OSLH     NO_OSTR
+#define NO_APOS     NO_QUOT
+#define NO_LESS     NO_LABK
+#define NO_QUO2     NO_DQUO
+#define NO_BULT     NO_CURR
+#define NO_GRTR     NO_RABK
+#define NO_MU       NO_MICR
+// Norwegian macOS symbols
+#define NO_ACUT_MAC NO_BSLS       // ´
+#define NO_APOS_MAC NO_LABK       // '
+#define NO_AT_MAC   NO_QUOT       // @
+#define NO_BSLS_MAC S(ALGR(NO_7)) // (backslash)
+#define NO_DLR_MAC  S(NO_4)       // $
+#define NO_GRV_MAC  ALGR(NO_BSLS) // `
+#define NO_GRTR_MAC S(NO_PIPE)    // >
+#define NO_LCBR_MAC S(ALGR(NO_8)) // {
+#define NO_LESS_MAC NO_PIPE       // <
+#define NO_PIPE_MAC ALGR(NO_7)    // |
+#define NO_RCBR_MAC S(ALGR(NO_9)) // }
 */
